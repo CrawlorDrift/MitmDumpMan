@@ -70,9 +70,6 @@ class XHS(ProcessBase):
         return "xhs_search"
 
     def parse_process(self, results):
-        """
-        """
-        # TODO: xiaohongshu process logic
         logger.info(results)
         for result in results:
             note_id = result['note']['id']
