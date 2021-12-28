@@ -25,6 +25,7 @@ def response(flow) -> None:
     """
     for source in ResourceList.keys():
         if ResourceList.get(source) in flow.request.url:
+            ctx.log.error("-----------------------")
             ctx.log.info(f'Starting Process Filter URLS: {ResourceList.get(source)}')
             body = unquote(flow.response.text)
             data = json.loads(body)
