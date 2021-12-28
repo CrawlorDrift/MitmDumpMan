@@ -12,11 +12,10 @@ import json
 from urllib.parse import unquote
 from mitmproxy import ctx
 
-
-def request(flow):
-    ctx.log.info(str(flow.request.url))
-    ctx.log.info(str(flow.request.method))
-    ctx.log.info(str(flow.request.path))
+# def request(flow):
+#     ctx.log.info(str(flow.request.url))
+#     ctx.log.info(str(flow.request.method))
+#     ctx.log.info(str(flow.request.path))
 
 
 def response(flow) -> None:
