@@ -4,7 +4,8 @@
 # @Date         : 28-12-2021
 # @Author       : Payne
 # @Email        : wuzhipeng1289690157@gmail.com
-# @Desc:
+# @Desc: process logic
+
 from config import *
 import pymysql
 from loguru import logger

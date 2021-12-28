@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# @File         : script.py
+# @Date         : 28-12-2021
+# @Author       : Payne
+# @Email        : wuzhipeng1289690157@gmail.com
+# @Desc:    Intercept entry
+
 from config import ResourceList
 from process import all_entrances
 import json
