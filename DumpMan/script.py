@@ -23,4 +23,5 @@ def response(flow) -> None:
             logger.info(f'Starting Process Filter URLS: {ResourceList.get(source)}')
             body = unquote(flow.response.text)
             data = json.loads(body)
-            all_entrances(source, data)
+            results = data.get('data') or []
+            all_entrances(source, results)
