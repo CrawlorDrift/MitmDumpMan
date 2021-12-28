@@ -7,6 +7,7 @@
 # @Desc:
 from config import *
 import pymysql
+from loguru import logger
 
 __all__ = 'all_entrances'
 
@@ -63,7 +64,7 @@ class XHS(ProcessBase):
         """
         """
         # TODO: xiaohongshu process logic
-        print(results)
+        logger.info(results)
 
     def collect_context(self):
         StrategyFactory.register(self.get_source(), XHS)
