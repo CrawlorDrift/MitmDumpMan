@@ -5,6 +5,7 @@
 # @Author       : Payne
 # @Email        : wuzhipeng1289690157@gmail.com
 # @Desc:    Intercept entry
+import pprint
 from typing import Any
 from config import ResourceList
 from process import all_entrances
@@ -29,5 +30,6 @@ def response(flow) -> None:
             ctx.log.info(f'Starting Process Filter URLS: {ResourceList.get(source)}')
             body = unquote(flow.response.text)
             data = json.loads(body)
+            pprint.pprint(data)
             results: list[Any] | Any = data['data']['items'] or []
             all_entrances(source, results)
