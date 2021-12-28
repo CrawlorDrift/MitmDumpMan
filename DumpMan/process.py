@@ -8,7 +8,6 @@
 
 from config import *
 import pymysql
-from loguru import logger
 
 __all__ = 'all_entrances'
 
@@ -70,7 +69,6 @@ class XHS(ProcessBase):
         return "xhs_search"
 
     def parse_process(self, results):
-        logger.info(results)
         for result in results:
             note_id = result['note']['id']
             title = result['note']['title'] if result['note']['title'] else result['note']['desc']
@@ -85,7 +83,6 @@ class XHS(ProcessBase):
             comment_str = f"""("{note_id}", "{title}", "{user_name}", "{user_id}", "{liked_count}")"""
             insert_query = f"""insert ignore into xiaohongshu_comment_note_2(`note_id`, `title`, `user_name`, `user_id`, `liked_count`)
                                         values {comment_str} on duplicate key update liked_count = {liked_count};"""
-            logger.info(f"process sql: {insert_query}")
             self.storage(sql_query=insert_query)
 
 

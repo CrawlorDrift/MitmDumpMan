@@ -11,7 +11,9 @@ from config import ResourceList
 from process import all_entrances
 import json
 from urllib.parse import unquote
-# from mitmproxy import ctx
+from mitmproxy import ctx
+
+
 # def request(flow):
 #     ctx.log.info(str(flow.request.url))
 #     ctx.log.info(str(flow.request.method))
@@ -25,10 +27,8 @@ def response(flow) -> None:
     """
     for source in ResourceList.keys():
         if ResourceList.get(source) in flow.request.url:
-            print("-----------------------")
-            print(f'Starting Process Filter URLS: {ResourceList.get(source)}')
             body = unquote(flow.response.text)
             data = json.loads(body)
-            pprint.pprint(data)
             results: list[Any] | Any = data['data']['items'] or []
-            # all_entrances(source, results)
+            ctx.log.info(f"First UserId: {results[0]['note']['id']} Processing...: ")
+            all_entrances(source, results)
