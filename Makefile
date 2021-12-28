@@ -1,7 +1,7 @@
 .PYTHON: dump
 
 dump:
-	supervisord -c supervisord.conf
+	 mitmdump -s DumpMan/script.py -p 8888
 
 
 push:

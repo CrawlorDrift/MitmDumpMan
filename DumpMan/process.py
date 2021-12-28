@@ -1,7 +1,19 @@
-#!/usr/bin/env python
-# ~*~ coding: utf-8 ~*~
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# @File         : process.py
+# @Date         : 28-12-2021
+# @Author       : Payne
+# @Email        : wuzhipeng1289690157@gmail.com
+# @Desc:
+from config import *
+import pymysql
 
 __all__ = 'all_entrances'
+
+
+def mysql_client(**kwargs):
+    client = pymysql.connect(**MySQLClientParam)
+    return client, client.cursor()
 
 
 class StrategyFactory(object):

@@ -1,5 +1,5 @@
-from MitmDumpMan.config import *
-from Process import all_entrances
+from config import ResourceList
+from process import all_entrances
 import json
 from urllib.parse import unquote
 from loguru import logger
