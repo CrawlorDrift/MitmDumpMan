@@ -5,6 +5,7 @@
 # @Author       : Payne
 # @Email        : wuzhipeng1289690157@gmail.com
 # @Desc:    Intercept entry
+from typing import Any
 
 from config import ResourceList
 from process import all_entrances
@@ -23,5 +24,5 @@ def response(flow) -> None:
             logger.info(f'Starting Process Filter URLS: {ResourceList.get(source)}')
             body = unquote(flow.response.text)
             data = json.loads(body)
-            results = data.get('data') or []
+            results: list[Any] | Any = data['data']['items'] or []
             all_entrances(source, results)

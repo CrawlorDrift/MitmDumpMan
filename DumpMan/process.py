@@ -13,11 +13,6 @@ from loguru import logger
 __all__ = 'all_entrances'
 
 
-def mysql_client(**kwargs):
-    client = pymysql.connect(**MySQLClientParam)
-    return client, client.cursor()
-
-
 class StrategyFactory(object):
     strategy = {}
 
@@ -52,23 +47,49 @@ class ProcessBase(object):
     def parse_process(self, results):
         pass
 
+    @staticmethod
+    def mysql_client():
+        client = pymysql.connect(**MySQLClientParam)
+        return client, client.cursor()
+
+    def storage(self, sql_query):
+        client, cursor = self.mysql_client()
+        cursor.execute(sql_query)
+        client.commit()
+
 
 class XHS(ProcessBase):
     """
     @source: xiao hong shu
     """
 
+    def collect_context(self):
+        StrategyFactory.register(self.get_source(), XHS)
+
     def get_source(self):
-        return "xiaohongshu"
+        return "xhs_search"
 
     def parse_process(self, results):
         """
         """
         # TODO: xiaohongshu process logic
         logger.info(results)
-
-    def collect_context(self):
-        StrategyFactory.register(self.get_source(), XHS)
+        for result in results:
+            note_id = result['note']['id']
+            title = result['note']['title'] if result['note']['title'] else result['note']['desc']
+            desc = result['note']['desc']
+            liked_count = result['note']['liked_count']
+            note_type = result['note']['type']
+            user_name = result['note']['user']['nickname']
+            user_id = result['note']['user']['userid']
+            tag_info = result['note']['tag_info']
+            timestamp = result['note']['timestamp']
+            geo_info = result['note']['geo_info']
+            comment_str = f"""("{note_id}", "{title}", "{user_name}", "{user_id}", "{liked_count}")"""
+            insert_query = f"""insert ignore into xiaohongshu_comment_note_2(`note_id`, `title`, `user_name`, `user_id`, `liked_count`)
+                                        values {comment_str} on duplicate key update liked_count = {liked_count};"""
+            logger.info(f"process sql: {insert_query}")
+            self.storage(sql_query=insert_query)
 
 
 def init_strategy():
@@ -78,7 +99,7 @@ def init_strategy():
     XHS().collect_context()
 
 
-def all_entrances(source: str, results: str):
+def all_entrances(source: str, results: str) -> object:
     """All entrances
     :param source:
     :param results:
@@ -92,4 +113,4 @@ def all_entrances(source: str, results: str):
 
 
 if __name__ == '__main__':
-    all_entrances('xiaohongshu', '{asd:1}')
+    all_entrances('xhs_search', "Hello")

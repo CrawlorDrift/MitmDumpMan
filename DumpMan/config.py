@@ -27,13 +27,14 @@ from typing import AnyStr, List, Dict
 # })
 
 ResourceList: Dict = {
-    "xiaohongshu": "xiaohongshu.com/api/sns/v10/search/notes"
+    "xhs_search": "xiaohongshu.com/api/sns/v10/search/notes"
 }
 KeyWord: List[AnyStr] = []
+
 MySQLClientParam: Dict = {
-    'host': '127.0.0.1',
+    'host': '10.21.200.48',
     'port': 3306,
-    'user': 'root',
-    'password': '123123',
-    'database': '',
+    'user': 'opinion',
+    'password': 'vDGM0lspmy=',
+    'database': 'opinion',
 }
