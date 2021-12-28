@@ -1,5 +1,5 @@
 from MitmDumpMan.config import *
-from MitmDumpMan.Process import AllEntrances
+from Process import all_entrances
 import json
 from urllib.parse import unquote
 from loguru import logger
@@ -10,10 +10,9 @@ def response(flow) -> None:
     :param flow:
     :return:
     """
-    # TODO:Batch Process logic
-    for url in FilterURLS:
-        if url in flow.request.url:
-            logger.info(f'Starting Process Filter URLS: {url}')
+    for source in ResourceList.keys():
+        if ResourceList.get(source) in flow.request.url:
+            logger.info(f'Starting Process Filter URLS: {ResourceList.get(source)}')
             body = unquote(flow.response.text)
             data = json.loads(body)
-            AllEntrances('xiaohongshu', data)
+            all_entrances(source, data)

@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # ~*~ coding: utf-8 ~*~
-"""
-https://www.cnblogs.com/failymao/archive/2020/03/10/12455840.html
-"""
 
-__all__ = 'AllEntrances'
+__all__ = 'all_entrances'
 
 
 class StrategyFactory(object):
@@ -30,53 +27,55 @@ class StrategyFactory(object):
         cls.strategy[strategy_source] = strategy
 
 
-class SuperProcess(object):
+class ProcessBase(object):
+    """
+    Data processing base class
+    """
 
     def get_source(self):
         pass
 
-    def parse_process(self):
+    def parse_process(self, results):
         pass
 
 
-class XHS(SuperProcess):
+class XHS(ProcessBase):
     """
     @source: xiao hong shu
     """
 
-    def __init__(self, results):
-        self.results = results
-
     def get_source(self):
         return "xiaohongshu"
 
-    def parse_process(self):
+    def parse_process(self, results):
+        """
+        """
         # TODO: xiaohongshu process logic
-        print(self.results)
+        print(results)
 
     def collect_context(self):
         StrategyFactory.register(self.get_source(), XHS)
 
 
-def Init_Strategys(results: str):
+def init_strategy():
     """
     :return:
     """
-    XHS(results).collect_context()
+    XHS().collect_context()
 
 
-def AllEntrances(source: str, results: str):
+def all_entrances(source: str, results: str):
     """All entrances
     :param source:
     :param results:
     :return:
     """
-    Init_Strategys(results=results)
+    init_strategy()
     strategy = StrategyFactory.get_strategy_by_source(source=source)
     if not strategy:
         raise Exception("Please Check! Is there really this data source? ")
-    return strategy().parse_process()
+    return strategy().parse_process(results)
 
 
 if __name__ == '__main__':
-    AllEntrances('xiaohongshu.com', '{}')
+    all_entrances('xiaohongshu', '{asd:1}')

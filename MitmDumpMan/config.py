@@ -1,10 +1,12 @@
 from environs import Env
-from typing import AnyStr, List
+from typing import AnyStr, List, Dict
 
 env = Env()
 
 # Filter URL
-FilterURLS: List[AnyStr] = env.list('URLS', [])
+ResourceList: Dict = env.dict('URLS', {
+    "xiaohongshu": "xiaohongshu.com/api/sns/v10/search/notes"
+})
 
 # Search key word List
 KeyWord: List[AnyStr] = env.list('KeyWord', [])

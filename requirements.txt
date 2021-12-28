@@ -1,4 +1,3 @@
 environs
-mitmproxy
 supervisor
 loguru
