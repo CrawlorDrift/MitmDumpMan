@@ -25,7 +25,7 @@ python3 -m pip install -Ur requirements.txt
 └── supervisord.conf
 ```
 
-### Add new resource 
+### Add new resource
 
 1. first: You need edit  `DumpMan/config.py`, add some target resouce message in ResourceList Field
 2. Sencond: add new Strategy and process logic
@@ -51,3 +51,7 @@ netstat -ntlp
 # check Port occupancy
 lsof -i:8090 
 ```
+
+## TODO
+
+Docker、Kubernetes 
