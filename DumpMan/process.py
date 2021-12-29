@@ -16,21 +16,21 @@ class StrategyFactory(object):
     strategy = {}
 
     @classmethod
-    def get_strategy_by_source(cls, source):
+    def get_strategy_by_source(cls, source: AnyStr):
         """Get the specific policy class from the source
-        :param source:
+        :param source: AnyStr
         :return:
         """
         return cls.strategy.get(source)
 
     @classmethod
-    def register(cls, strategy_source, strategy):
+    def register(cls, strategy_source: AnyStr, strategy: object):
         """Registration policy type
         :param strategy_source:
         :param strategy:
         :return:
         """
-        if strategy_source == "":
+        if strategy_source is None:
             raise Exception("strategyType can't be null")
         cls.strategy[strategy_source] = strategy
 
@@ -40,10 +40,20 @@ class ProcessBase(object):
     Data processing base class
     """
 
-    def get_source(self):
+    @classmethod
+    def collect_context(cls):
+        """
+        StrategyFactory.register
+        """
+        StrategyFactory.register(cls().get_source(), cls)
+
+    def get_source(self) -> str:
         pass
 
     def parse_process(self, results):
+        """
+        @res
+        """
         pass
 
     @staticmethod
@@ -57,18 +67,15 @@ class ProcessBase(object):
         client.commit()
 
 
-class XHS(ProcessBase):
+class XHS_Search(ProcessBase):
     """
     @source: xiao hong shu
     """
 
-    def collect_context(self):
-        StrategyFactory.register(self.get_source(), XHS)
-
     def get_source(self):
         return "xhs_search"
 
-    def parse_process(self, results):
+    def parse_process(self, results: Dict):
         for result in results:
             note_id = result['note']['id']
             title = result['note']['title'] if result['note']['title'] else result['note']['desc']
@@ -86,20 +93,16 @@ class XHS(ProcessBase):
             self.storage(sql_query=insert_query)
 
 
-def init_strategy():
-    """
-    :return:
-    """
-    XHS().collect_context()
-
-
 def all_entrances(source: str, results: str) -> object:
     """All entrances
     :param source:
     :param results:
     :return:
     """
-    init_strategy()
+    # init strategy
+    xhs_search = XHS_Search()
+    xhs_search.collect_context()
+    # Build In
     strategy = StrategyFactory.get_strategy_by_source(source=source)
     if not strategy:
         raise Exception("Please Check! Is there really this data source? ")
