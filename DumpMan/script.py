@@ -5,7 +5,6 @@
 # @Author       : Payne
 # @Email        : wuzhipeng1289690157@gmail.com
 # @Desc:    Intercept entry
-import pprint
 from typing import Any
 from config import ResourceList
 from process import all_entrances
@@ -14,14 +13,18 @@ from urllib.parse import unquote
 from mitmproxy import ctx
 
 
-# def request(flow):
-#     ctx.log.info(str(flow.request.url))
-#     ctx.log.info(str(flow.request.method))
-#     ctx.log.info(str(flow.request.path))
+def request(flow) -> None:
+    """Before request Transfer
+    :param flow:
+    :return:
+    """
+    ctx.log.info(str(flow.request.url))
+    ctx.log.info(str(flow.request.method))
+    ctx.log.info(str(flow.request.path))
 
 
 def response(flow) -> None:
-    """
+    """response Intercept processing
     :param flow:
     :return:
     """
