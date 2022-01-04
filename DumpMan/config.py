@@ -29,7 +29,6 @@ from typing import AnyStr, List, Dict
 ResourceList: Dict = {
     "xhs_search": "xiaohongshu.com/api/sns/v10/search/notes"
 }
-KeyWord: List[AnyStr] = []
 
 MySQLClientParam: Dict = {
     'host': '10.21.200.48',
