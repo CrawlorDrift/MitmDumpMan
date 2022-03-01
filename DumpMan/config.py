@@ -6,6 +6,7 @@
 # @Email        : wuzhipeng1289690157@gmail.com
 # @Desc:
 from typing import AnyStr, List, Dict
+
 # from environs import Env
 # env = Env()
 
@@ -26,14 +27,12 @@ from typing import AnyStr, List, Dict
 #     'database': '',
 # })
 
-ResourceList: Dict = {
-    "xhs_search": "xiaohongshu.com/api/sns/v10/search/notes"
-}
+ResourceList: Dict = {"xhs_search": "xiaohongshu.com/api/sns/v10/search/notes"}
 
 MySQLClientParam: Dict = {
-    'host': '10.21.200.48',
-    'port': 3306,
-    'user': 'opinion',
-    'password': 'vDGM0lspmy=',
-    'database': 'opinion',
+    "host": "10.21.200.48",
+    "port": 3306,
+    "user": "opinion",
+    "password": "vDGM0lspmy=",
+    "database": "opinion",
 }

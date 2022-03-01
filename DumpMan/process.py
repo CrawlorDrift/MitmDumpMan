@@ -9,7 +9,7 @@
 from config import *
 import pymysql
 
-__all__ = 'all_entrances'
+__all__ = "all_entrances"
 
 
 class StrategyFactory(object):
@@ -68,22 +68,25 @@ class ProcessBase(object):
 
 
 class XHS_Search(ProcessBase):
-
     def get_source(self):
         return "xhs_search"
 
     def parse_process(self, results: Dict):
         for result in results:
-            note_id = result['note']['id']
-            title = result['note']['title'] if result['note']['title'] else result['note']['desc']
-            desc = result['note']['desc']
-            liked_count = result['note']['liked_count']
-            note_type = result['note']['type']
-            user_name = result['note']['user']['nickname']
-            user_id = result['note']['user']['userid']
-            tag_info = result['note']['tag_info']
-            timestamp = result['note']['timestamp']
-            geo_info = result['note']['geo_info']
+            note_id = result["note"]["id"]
+            title = (
+                result["note"]["title"]
+                if result["note"]["title"]
+                else result["note"]["desc"]
+            )
+            desc = result["note"]["desc"]
+            liked_count = result["note"]["liked_count"]
+            note_type = result["note"]["type"]
+            user_name = result["note"]["user"]["nickname"]
+            user_id = result["note"]["user"]["userid"]
+            tag_info = result["note"]["tag_info"]
+            timestamp = result["note"]["timestamp"]
+            geo_info = result["note"]["geo_info"]
             comment_str = f"""("{note_id}", "{title}", "{user_name}", "{user_id}", "{liked_count}")"""
             insert_query = f"""insert ignore into xiaohongshu_comment_note_2(`note_id`, `title`, `user_name`, `user_id`, `liked_count`)
                                         values {comment_str} on duplicate key update liked_count = {liked_count};"""
@@ -100,16 +103,20 @@ class XHS_Lv(ProcessBase):
 
     def parse_process(self, results: Dict):
         for result in results:
-            note_id = result['note']['id']
-            title = result['note']['title'] if result['note']['title'] else result['note']['desc']
-            desc = result['note']['desc']
-            liked_count = result['note']['liked_count']
-            note_type = result['note']['type']
-            user_name = result['note']['user']['nickname']
-            user_id = result['note']['user']['userid']
-            tag_info = result['note']['tag_info']
-            timestamp = result['note']['timestamp']
-            geo_info = result['note']['geo_info']
+            note_id = result["note"]["id"]
+            title = (
+                result["note"]["title"]
+                if result["note"]["title"]
+                else result["note"]["desc"]
+            )
+            desc = result["note"]["desc"]
+            liked_count = result["note"]["liked_count"]
+            note_type = result["note"]["type"]
+            user_name = result["note"]["user"]["nickname"]
+            user_id = result["note"]["user"]["userid"]
+            tag_info = result["note"]["tag_info"]
+            timestamp = result["note"]["timestamp"]
+            geo_info = result["note"]["geo_info"]
             comment_str = f"""("{note_id}", "{title}", "{user_name}", "{user_id}", "{liked_count}")"""
             insert_query = f"""insert ignore into xiaohongshu_comment_note_2(`note_id`, `title`, `user_name`, `user_id`, `liked_count`)
                                         values {comment_str} on duplicate key update liked_count = {liked_count};"""
@@ -136,6 +143,6 @@ def all_entrances(source: str, results: str) -> object:
     return strategy().parse_process(results)
 
 
-if __name__ == '__main__':
-    all_entrances('xhs_lv', "Hello")
-    all_entrances('xhs_search', "Hello")
+if __name__ == "__main__":
+    all_entrances("xhs_lv", "Hello")
+    all_entrances("xhs_search", "Hello")
