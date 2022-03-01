@@ -11,16 +11,16 @@ from process import all_entrances
 import json
 from urllib.parse import unquote
 from mitmproxy import ctx
+from loguru import logger
 
-
-def request(flow) -> None:
-    """Before request Transfer
-    :param flow:
-    :return:
-    """
-    ctx.log.info(str(flow.request.url))
-    ctx.log.info(str(flow.request.method))
-    ctx.log.info(str(flow.request.path))
+# def request(flow) -> None:
+#     """Before request Transfer
+#     :param flow:
+#     :return:
+#     """
+#     ctx.log.info(str(flow.request.url))
+#     ctx.log.info(str(flow.request.method))
+#     ctx.log.info(str(flow.request.path))
 
 
 def response(flow) -> None:
@@ -33,5 +33,5 @@ def response(flow) -> None:
             body = unquote(flow.response.text)
             data = json.loads(body)
             results: list[Any] | Any = data["data"]["items"] or []
-            ctx.log.info(f"First UserId: {results[0]['note']['id']} Processing...: ")
+            logger.info(f"First UserId: {results[0]['note']['id']} Processing...: ")
             all_entrances(source, results)

@@ -1,6 +1,7 @@
 # MitmDumpMan
 
-MitmDumpMan is a forward middleware
+MitmDumpMan is a forwarding middleware based on the specific implementation of mitmdump, 
+use it can Easily automate grabs
 
 ## requirements
 
@@ -17,9 +18,9 @@ python3 -m pip install -Ur requirements.txt
 ```text
 .
 ├── DumpMan
-│   ├── Process.py  # 处理策略工厂类
-│   ├── config.py   # 配置文件
-│   └── script.py   # mitmdump 处理脚本
+│ ├── Process.py  # 处理策略工厂类
+│ ├── config.py   # 配置文件
+│ └── script.py   # mitmdump 处理脚本
 ├── README.md
 ├── requirements.txt
 └── supervisord.conf
@@ -34,11 +35,9 @@ python3 -m pip install -Ur requirements.txt
 
 ```bash
 # Base run
-mitmdump -s DumpMan/script.py -p 8888
+mitmdump -s DumpMan/script.py -p 8088
 # Background run
-nohub mitmdump -s DumpMan/script.py -p 8888 &
-# Abandon the log to run in the background
-nohub mitmdump -s DumpMan/script.py -p 8888 >> /usr/local/output.log 2>&1 &
+mitmdump -s DumpMan/script.py -p 8088 > /dev/null 2>&1 &
 ```
 
 ### check Task

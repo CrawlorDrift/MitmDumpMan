@@ -8,8 +8,18 @@
 
 from config import *
 import pymysql
+from loguru import logger
 
 __all__ = "all_entrances"
+logger.add(
+    'runtime_{time}.log',
+    rotation='00:00',
+    level="ERROR",
+    diagnose=True,
+    enqueue=True,
+    compression='zip',
+    backtrace=True,
+)
 
 
 class StrategyFactory(object):
@@ -63,11 +73,13 @@ class ProcessBase(object):
 
     def storage(self, sql_query):
         client, cursor = self.mysql_client()
+        logger.info(f"Process sql: {sql_query}")
         cursor.execute(sql_query)
         client.commit()
 
 
 class XHS_Search(ProcessBase):
+
     def get_source(self):
         return "xhs_search"
 
@@ -124,7 +136,7 @@ class XHS_Lv(ProcessBase):
 
 
 def init_strategy():
-    XHS_Lv.collect_context()
+    # XHS_Lv.collect_context()
     XHS_Search.collect_context()
 
 
