@@ -38,6 +38,8 @@ python3 -m pip install -Ur requirements.txt
 mitmdump -s DumpMan/script.py -p 8088
 # Background run
 mitmdump -s DumpMan/script.py -p 8088 > /dev/null 2>&1 &
+# nohop
+nohup mitmdump -s DumpMan/script.py -p 8088 > out.log 2>&1 &
 ```
 
 ### check Task
