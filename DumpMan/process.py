@@ -136,8 +136,8 @@ class XHS_Lv(ProcessBase):
 
 
 def init_strategy():
-    # XHS_Lv.collect_context()
-    XHS_Search.collect_context()
+    XHS_Lv.collect_context()
+    # XHS_Search.collect_context()
 
 
 def all_entrances(source: str, results: str) -> object:

@@ -32,6 +32,6 @@ def response(flow) -> None:
         if ResourceList.get(source) in flow.request.url:
             body = unquote(flow.response.text)
             data = json.loads(body)
-            results: list[Any] | Any = data["data"]["items"] or []
+            results: list[Any] = data["data"]["items"] or []
             logger.info(f"First UserId: {results[0]['note']['id']} Processing...: ")
             all_entrances(source, results)

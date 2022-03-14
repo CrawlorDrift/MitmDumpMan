@@ -27,7 +27,10 @@ from typing import AnyStr, List, Dict
 #     'database': '',
 # })
 
-ResourceList: Dict = {"xhs_search": "xiaohongshu.com/api/sns/v10/search/notes"}
+ResourceList: Dict = {
+    "xhs_lv": "xiaohongshu.com/api/sns/v10/search/notes"
+    # "xhs_search": "xiaohongshu.com/api/sns/v10/search/notes"
+}
 
 MySQLClientParam: Dict = {
     "host": "10.21.200.48",
