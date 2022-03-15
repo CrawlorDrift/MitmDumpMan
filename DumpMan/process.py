@@ -100,7 +100,7 @@ class XHS_Search(ProcessBase):
             timestamp = result["note"]["timestamp"]
             geo_info = result["note"]["geo_info"]
             comment_str = f"""("{note_id}", "{title}", "{user_name}", "{user_id}", "{liked_count}")"""
-            insert_query = f"""insert ignore into xiaohongshu_comment_note_2(`note_id`, `title`, `user_name`, `user_id`, `liked_count`)
+            insert_query = f"""insert ignore into xiaohongshu_comment_note(`note_id`, `title`, `user_name`, `user_id`, `liked_count`)
                                         values {comment_str} on duplicate key update liked_count = {liked_count};"""
             self.storage(sql_query=insert_query)
 
