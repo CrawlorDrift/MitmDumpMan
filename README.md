@@ -1,6 +1,6 @@
-# MitmDumpMan
+# intermediary
 
-MitmDumpMan is a forwarding middleware based on the specific implementation of mitmdump, 
+intermediary is a forwarding middleware based on the specific implementation of mitmdump, 
 use it can Easily automate grabs
 
 ## requirements
