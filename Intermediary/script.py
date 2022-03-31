@@ -5,13 +5,13 @@
 # @Author       : Payne
 # @Email        : wuzhipeng1289690157@gmail.com
 # @Desc:    Intercept entry
-from typing import Any
-from config import ResourceList
-from process import all_entrances
 import json
-from urllib.parse import unquote
 from mitmproxy import ctx
 from loguru import logger
+from process import all_entrances
+
+from urllib.parse import unquote
+from configs import ResourceList
 
 # def request(flow) -> None:
 #     """Before request Transfer

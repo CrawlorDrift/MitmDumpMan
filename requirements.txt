@@ -1,0 +1,5 @@
+supervisor
+mitmproxy
+loguru
+environs
+pymysql

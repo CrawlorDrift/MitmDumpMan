@@ -5,28 +5,16 @@
 # @Author       : Payne
 # @Email        : wuzhipeng1289690157@gmail.com
 # @Desc: process logic
-
-from config import *
 import pymysql
 from loguru import logger
-
-__all__ = "all_entrances"
-# logger.add(
-#     'runtime_{time}.log',
-#     rotation='00:00',
-#     level="ERROR",
-#     diagnose=True,
-#     enqueue=True,
-#     compression='zip',
-#     backtrace=True,
-# )
+from configs import MySQLClientParam
 
 
 class StrategyFactory(object):
     strategy = {}
 
     @classmethod
-    def get_strategy_by_source(cls, source: AnyStr):
+    def get_strategy_by_source(cls, source):
         """Get the specific policy class from the source
         :param source: AnyStr
         :return:
@@ -34,7 +22,7 @@ class StrategyFactory(object):
         return cls.strategy.get(source)
 
     @classmethod
-    def register(cls, strategy_source: AnyStr, strategy: object):
+    def register(cls, strategy_source, strategy: object):
         """Registration policy type
         :param strategy_source:
         :param strategy:
@@ -79,11 +67,10 @@ class ProcessBase(object):
 
 
 class XHS_Search(ProcessBase):
-
     def get_source(self):
         return "xhs_search"
 
-    def parse_process(self, results: Dict):
+    def parse_process(self, results):
         for result in results:
             note_id = result["note"]["id"]
             title = (
@@ -113,7 +100,7 @@ class XHS_Lv(ProcessBase):
     def get_source(self):
         return "xhs_lv"
 
-    def parse_process(self, results: Dict):
+    def parse_process(self, results):
         for result in results:
             note_id = result["note"]["id"]
             title = (
