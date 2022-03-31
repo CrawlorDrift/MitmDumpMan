@@ -1,11 +1,11 @@
-# intermediary
+# Intermediary
 
-intermediary is a forwarding middleware based on the specific implementation of mitmdump, 
-use it can Easily automate grabs
+Intermediary is a forwarding middleware based on the specific implementation 
+of mitmdump, use it can Easily automate grabs
 
 ## requirements
 
-python >= 3.6
+python >= 3.7
 
 mitmproxy
 
@@ -17,7 +17,7 @@ python3 -m pip install -Ur requirements.txt
 
 ```text
 .
-├── DumpMan
+├── Intermediary
 │ ├── Process.py  # 处理策略工厂类
 │ ├── config.py   # 配置文件
 │ └── script.py   # mitmdump 处理脚本
@@ -28,7 +28,7 @@ python3 -m pip install -Ur requirements.txt
 
 ### Add new resource
 
-1. first: You need edit  `DumpMan/config.py`, add some target resouce message in ResourceList Field
+1. first: You need edit  `Intermediary/config.py`, add some target resouce message in ResourceList Field
 2. Sencond: add new Strategy and process logic
 
 ## RUN
